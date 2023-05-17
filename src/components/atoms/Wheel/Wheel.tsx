@@ -1,36 +1,29 @@
-import React from 'react';
-
-const Wheel = () => {
+function Wheel() {
 	return (
 		<div
-			className='relative'
 			style={{
-				height: '256px',
-				width: '256px',
-				left: '132px',
-				top: '17px',
+				position: 'relative',
+				width: '527px',
+				height: '368px',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
 			}}>
-			<svg
-				xmlns='http://www.w3.org/2000/svg'
-				viewBox='0 0 256 256'
+			<div
 				style={{
 					position: 'absolute',
-					top: 0,
-					left: 0,
-					width: '100%',
-					height: '100%',
-				}}>
-				<ellipse
-					cx='128'
-					cy='128'
-					rx='70'
-					ry='70'
-					fill='rgba(243, 243, 243, 1)'
-				/>
-				<ellipse cx='128' cy='128' rx='50' ry='50' fill='#ffffff' />
-			</svg>
+					width: '256px',
+					height: '256px',
+					top: '50%',
+					left: '50%',
+					transform: 'translate(-50%, -50%)',
+				}}
+				className='bg-gray-200 rounded-full flex items-center justify-center'>
+				<div
+					style={{ width: '162px', height: '162px' }}
+					className='bg-white rounded-full'></div>
+			</div>
 		</div>
 	);
-};
-
+}
 export default Wheel;

@@ -1,9 +1,9 @@
-import Circle from '@/components/atoms/Wheel/Wheel';
+import MainPage from '@/components/templates/MainPageTemplate/MainPageTemplate';
 
 export default function Home() {
 	return (
 		<main>
-			<Circle />
+			<MainPage />
 		</main>
 	);
 }

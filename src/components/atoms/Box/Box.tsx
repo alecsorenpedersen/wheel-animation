@@ -1,15 +1,19 @@
-interface InfoBoxProps {
-	isActive?: boolean;
-	children: React.ReactNode;
-}
+import { InfoBoxProps } from '@/types';
 
-const Box = ({ children }: InfoBoxProps) => {
+const GreyBox = ({ children }: InfoBoxProps) => {
 	return (
 		<div
-			className={`flex flex-row items-center p-6 gap-4 w-64 h-20 bg-gray-200 rounded`}>
+			style={{
+				width: '277px',
+				height: '80px',
+				padding: '24px 32px',
+				gap: '16px',
+			}}
+			className='bg-gray-200 rounded-lg flex flex-row items-center'
+			data-testid='grey-box'>
 			{children}
 		</div>
 	);
 };
 
-export default Box;
+export default GreyBox;

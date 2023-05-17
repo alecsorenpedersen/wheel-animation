@@ -1,8 +1,10 @@
-body {
-	background-color: white;
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-html {
+html,
+body {
+	/* @apply bg-white text-black; */
 	font-family: 'Montserrat', sans-serif;
 	font-size: 12px;
 	font-weight: 500;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import {
 	CameraIcon,
@@ -8,6 +7,7 @@ import {
 	SoundIcon,
 	DeviceIcon,
 	TravelIcon,
+	WaterproofIcon,
 } from './Icons';
 
 describe('Icons', () => {
@@ -47,7 +47,7 @@ describe('Icons', () => {
 	});
 
 	it('should render WaterproofIcon without errors', () => {
-		const { getByTestId } = render(<TravelIcon />);
+		const { getByTestId } = render(<WaterproofIcon />);
 		expect(getByTestId('waterproof-icon')).toBeInTheDocument();
 	});
 });
