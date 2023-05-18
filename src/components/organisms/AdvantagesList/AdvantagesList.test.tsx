@@ -1,38 +1,75 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import AdvantagesCard from '../../molecules/AdvantagesCard/AdvantagesCard';
+import { render, fireEvent } from '@testing-library/react';
 import AdvantagesList from './AdvantagesList';
+import { ButtonIdentifier } from '@/types';
 
-jest.mock('../../molecules/AdvantagesCard/AdvantagesCard');
+jest.mock('../../molecules/AdvantagesCard/AdvantagesCard', () => {
+	const MockAdvantagesCard = ({
+		text,
+		isActive,
+		onClick,
+	}: {
+		text: string;
+		isActive: boolean;
+		onClick: () => void;
+	}) => (
+		<div onClick={onClick} data-testid={text}>
+			{text}-{isActive ? 'active' : 'inactive'}
+		</div>
+	);
+	return MockAdvantagesCard;
+});
 
-describe('RectangleList', () => {
-	const copyData = [
-		{
-			text: 'Capture stunning, detailed photos and videos',
-			icon: 'ShutterIcon',
-		},
-		{
-			text: 'Immerse yourself in pure, uninterrupted sound',
-			icon: 'SoundIcon',
-		},
-		{
-			text: 'Use the device worry-free in various environments',
-			icon: 'DeviceIcon',
-		},
-		{
-			text: 'Easily find your way to any destination',
-			icon: 'TravelIcon',
-		},
-	];
+describe('AdvantagesList', () => {
+	const setActiveIconMock = jest.fn();
 
-	const rectangleListStyle = {
-		width: '389px',
-		height: '368px',
-		order: 1,
-		flexGrow: 0,
-	};
+	let activeIcon: ButtonIdentifier[];
 
 	beforeEach(() => {
-		jest.clearAllMocks();
+		activeIcon = ['CameraIcon'];
+	});
+
+	it('renders without crashing', () => {
+		render(
+			<AdvantagesList
+				activeIcon={activeIcon}
+				setActiveIcon={setActiveIconMock}
+			/>,
+		);
+	});
+	it('adds icon to active state on icon click when not already active', () => {
+		setActiveIconMock.mockClear();
+		activeIcon = [];
+
+		const { getByTestId } = render(
+			<AdvantagesList
+				activeIcon={activeIcon}
+				setActiveIcon={setActiveIconMock}
+			/>,
+		);
+
+		const firstCardText = 'Capture stunning, detailed photos and videos';
+		const firstCard = getByTestId(firstCardText);
+
+		fireEvent.click(firstCard);
+
+		expect(setActiveIconMock).toHaveBeenCalledWith(['CameraIcon']);
+	});
+
+	it('removes icon from active state on icon click when already active', () => {
+		setActiveIconMock.mockClear();
+		activeIcon = ['CameraIcon'];
+		const { getByTestId } = render(
+			<AdvantagesList
+				activeIcon={activeIcon}
+				setActiveIcon={setActiveIconMock}
+			/>,
+		);
+
+		const firstCardText = 'Capture stunning, detailed photos and videos';
+		const firstCard = getByTestId(firstCardText);
+
+		fireEvent.click(firstCard);
+
+		expect(setActiveIconMock).toHaveBeenCalledWith([]);
 	});
 });

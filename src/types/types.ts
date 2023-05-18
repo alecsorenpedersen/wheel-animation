@@ -4,6 +4,7 @@ export interface AdvantagesCardProps {
 	text: string;
 	animatedText?: string | null;
 	onClick: () => void;
+	identifier: string;
 }
 
 export interface InfoBoxProps {

@@ -25,6 +25,8 @@ const AdvantagesList = ({ activeIcon, setActiveIcon }: AdvantagesListProps) => {
 					isActive={activeIcon.includes(identifier)}
 					icon={Icon}
 					onClick={() => handleIconClick(identifier)}
+					identifier={identifier}
+					data-testid={identifier}
 				/>
 			))}
 		</div>

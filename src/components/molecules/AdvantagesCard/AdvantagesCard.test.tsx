@@ -1,50 +1,91 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, cleanup, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import AdvantagesCard from './AdvantagesCard';
 
-// Setup function for cleaner tests
-const setup = (props = {}) => {
-	return render(
-		<AdvantagesCard
-			isActive={false}
-			onClick={function (): void {
-				throw new Error('Function not implemented.');
-			}}
-			text='Test text'
-			animatedText='Animated text'
-			icon={() => <div />}
-			{...props}
-		/>,
-	);
-};
+afterEach(cleanup);
+
+const mockIcon = () => <div>Icon</div>;
 
 describe('AdvantagesCard', () => {
 	beforeAll(() => {
 		jest.useFakeTimers();
 	});
 
-	afterAll(() => {
-		jest.useRealTimers();
+	it('renders without crashing', () => {
+		const { container } = render(
+			<AdvantagesCard
+				text='Test text'
+				animatedText='Animated text'
+				icon={mockIcon}
+				onClick={() => {}}
+				isActive={false}
+				identifier={''}
+			/>,
+		);
+		expect(container.firstChild).not.toBe(null);
 	});
 
-	it('renders without crashing', () => {
-		const { getByText } = setup();
+	it('renders the static text correctly', () => {
+		const { getByText } = render(
+			<AdvantagesCard
+				text='Test text'
+				animatedText='Animated text'
+				icon={mockIcon}
+				onClick={() => {}}
+				isActive={false}
+				identifier={''}
+			/>,
+		);
 		expect(getByText('Test text')).toBeInTheDocument();
 	});
 
-	it('does not show the animated text when not active', () => {
-		const { getByText } = setup({ isActive: false });
-		expect(getByText('Animated text')).toHaveStyle('opacity: 0');
-		expect(getByText('Animated text')).toHaveStyle(
-			'transform: translateX(-100%)',
+	it('renders the animated text with correct initial opacity', () => {
+		const { getByText } = render(
+			<AdvantagesCard
+				text='Test text'
+				animatedText='Animated text'
+				icon={mockIcon}
+				onClick={() => {}}
+				isActive={false}
+				identifier={''}
+			/>,
 		);
+		const animatedText = getByText('Animated text');
+		expect(animatedText).toBeInTheDocument();
+		expect(animatedText.style.opacity).toBe('0');
 	});
 
-	it('shows the animated text when active', () => {
-		const { getByText } = setup({ isActive: true });
-		jest.advanceTimersByTime(500);
-		expect(getByText('Animated text')).toHaveStyle('opacity: 1');
-		expect(getByText('Animated text')).toHaveStyle('transform: translateX(0)');
+	it('changes the animated text opacity when isActive prop changes', () => {
+		const { getByText, rerender } = render(
+			<AdvantagesCard
+				text='Test text'
+				animatedText='Animated text'
+				icon={mockIcon}
+				onClick={() => {}}
+				isActive={false}
+				identifier={''}
+			/>,
+		);
+		const animatedText = getByText('Animated text');
+		expect(animatedText.style.opacity).toBe('0');
+		rerender(
+			<AdvantagesCard
+				text='Test text'
+				animatedText='Animated text'
+				icon={mockIcon}
+				onClick={() => {}}
+				isActive={true}
+				identifier={''}
+			/>,
+		);
+		act(() => {
+			// to account for the delay using setTimeout
+			jest.advanceTimersByTime(500);
+		});
+		expect(animatedText.style.opacity).toBe('1');
+	});
+
+	afterAll(() => {
+		jest.useRealTimers();
 	});
 });

@@ -4,13 +4,18 @@ import Box from '../../atoms/Box/Box';
 import TextBox from '../../atoms/TextBox/TextBox';
 import { IconWrapper } from '../../atoms/icons';
 
+interface ExtendedAdvantagesCardProps extends AdvantagesCardProps {
+	identifier: string;
+}
+
 const AdvantagesCard = ({
 	text,
 	isActive,
 	icon,
 	onClick,
 	animatedText,
-}: AdvantagesCardProps) => {
+	identifier,
+}: ExtendedAdvantagesCardProps) => {
 	const [animate, setAnimate] = useState(false);
 
 	useEffect(() => {
@@ -22,7 +27,7 @@ const AdvantagesCard = ({
 	}, [isActive]);
 
 	return (
-		<Box isActive={isActive}>
+		<Box isActive={isActive} data-testid={identifier}>
 			<IconWrapper
 				isActive={isActive}
 				icon={icon}
