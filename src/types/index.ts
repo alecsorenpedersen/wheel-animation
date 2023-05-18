@@ -1,13 +1,23 @@
 import {
-	GreyRectangleProps,
+	AdvantagesCardProps,
 	InfoBoxProps,
 	IconWrapperProps,
 	TextBoxProps,
+	FeaturesCardProps,
+	AdvantagesListProps,
+	ButtonIdentifier,
+	FeatureCardProps,
+	FeatureWheelProps,
 } from './types';
 
 export type {
-	GreyRectangleProps,
+	AdvantagesCardProps,
 	InfoBoxProps,
 	IconWrapperProps,
 	TextBoxProps,
+	FeaturesCardProps,
+	AdvantagesListProps,
+	ButtonIdentifier,
+	FeatureCardProps,
+	FeatureWheelProps,
 };

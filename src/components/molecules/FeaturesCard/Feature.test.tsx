@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import CircleWithTextRight from './CircleTextRight';
+import CircleWithTextRight from './FeatureCard';
 
 describe('CircleWithTextRight', () => {
 	const mockOnClick = jest.fn();

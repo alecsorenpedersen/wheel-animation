@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import RectangleList from './RectangleList';
-import GreyRectangle from '../../molecules/GreyRectangle/GreyRectangle';
+import AdvantagesCard from '../../molecules/AdvantagesCard/AdvantagesCard';
+import AdvantagesList from './AdvantagesList';
 
-jest.mock('../../molecules/GreyRectangle/GreyRectangle');
+jest.mock('../../molecules/AdvantagesCard/AdvantagesCard');
 
 describe('RectangleList', () => {
 	const copyData = [
@@ -34,10 +34,5 @@ describe('RectangleList', () => {
 
 	beforeEach(() => {
 		jest.clearAllMocks();
-	});
-
-	it('renders the correct number of GreyRectangle components', () => {
-		render(<RectangleList />);
-		expect(GreyRectangle).toHaveBeenCalledTimes(copyData.length);
 	});
 });

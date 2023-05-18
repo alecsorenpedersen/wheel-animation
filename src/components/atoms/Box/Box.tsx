@@ -1,6 +1,10 @@
 import { InfoBoxProps } from '@/types';
 
-const GreyBox = ({ children }: InfoBoxProps) => {
+interface BoxProps extends InfoBoxProps {
+	isActive: boolean;
+}
+
+const Box = ({ children, isActive }: BoxProps) => {
 	return (
 		<div
 			style={{
@@ -8,6 +12,9 @@ const GreyBox = ({ children }: InfoBoxProps) => {
 				height: '80px',
 				padding: '24px 32px',
 				gap: '16px',
+				filter: isActive ? 'none' : 'blur(2px)',
+				transition: 'filter 0.3s',
+				background: ' #F3F3F3',
 			}}
 			className='bg-gray-200 rounded-lg flex flex-row items-center'
 			data-testid='grey-box'>
@@ -16,4 +23,4 @@ const GreyBox = ({ children }: InfoBoxProps) => {
 	);
 };
 
-export default GreyBox;
+export default Box;

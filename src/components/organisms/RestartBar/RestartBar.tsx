@@ -6,9 +6,10 @@ const RestartBar = () => {
 				position: 'fixed',
 				bottom: 0,
 				left: 0,
-				background: ' #F3F3F3',
+				background: ' rgb(243, 243, 243)',
 				height: '80px',
-			}}>
+			}}
+			data-testid='restart-bar'>
 			<span className='text-gray-700 text-lg'>Press R to Reset</span>
 		</div>
 	);
